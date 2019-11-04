@@ -1,0 +1,13 @@
+.search-header {
+    margin: 30px 0;
+    display: flex;
+    
+    &-logo {
+        margin: 0 30px;
+        cursor: pointer;
+    }
+
+    &-search-bar {
+        width: 700px;
+    }
+}
