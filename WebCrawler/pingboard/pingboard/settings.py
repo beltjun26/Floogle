@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Scrapy settings for Floogle project
+# Scrapy settings for pingboard project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -9,14 +9,14 @@
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = 'Floogle'
+BOT_NAME = 'pingboard'
 
-SPIDER_MODULES = ['Floogle.spiders']
-NEWSPIDER_MODULE = 'Floogle.spiders'
+SPIDER_MODULES = ['pingboard.spiders']
+NEWSPIDER_MODULE = 'pingboard.spiders'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'Floogle (+http://www.yourdomain.com)'
+#USER_AGENT = 'pingboard (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = False
@@ -47,13 +47,13 @@ ROBOTSTXT_OBEY = False
 # Enable or disable spider middlewares
 # See https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 #SPIDER_MIDDLEWARES = {
-#    'Floogle.middlewares.FloogleSpiderMiddleware': 543,
+#    'pingboard.middlewares.PingboardSpiderMiddleware': 543,
 #}
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #DOWNLOADER_MIDDLEWARES = {
-#    'Floogle.middlewares.FloogleDownloaderMiddleware': 543,
+#    'pingboard.middlewares.PingboardDownloaderMiddleware': 543,
 #}
 
 # Enable or disable extensions
@@ -65,7 +65,7 @@ ROBOTSTXT_OBEY = False
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 #ITEM_PIPELINES = {
-#    'Floogle.pipelines.FlooglePipeline': 300,
+#    'pingboard.pipelines.PingboardPipeline': 300,
 #}
 
 # Enable and configure the AutoThrottle extension (disabled by default)

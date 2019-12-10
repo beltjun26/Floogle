@@ -1,54 +1,60 @@
 version: '2.2'
 services:
-  # es01:
-  #   image: docker.elastic.co/elasticsearch/elasticsearch:7.4.1
-  #   container_name: es01
-  #   environment:
-  #     - node.name=es01
-  #     - discovery.seed_hosts=es02
-  #     - cluster.initial_master_nodes=es01,es02
-  #     - cluster.name=docker-cluster
-  #     - bootstrap.memory_lock=true
-  #     - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-  #   ulimits:
-  #     memlock:
-  #       soft: -1
-  #       hard: -1
-  #   volumes:
-  #     - esdata01:/usr/share/elasticsearch/data
-  #   ports:
-  #     - 9200:9200
-  #   networks:
-  #     - esnet
-  # es02:
-  #   image: docker.elastic.co/elasticsearch/elasticsearch:7.4.1
-  #   container_name: es02
-  #   environment:
-  #     - node.name=es02
-  #     - discovery.seed_hosts=es01
-  #     - cluster.initial_master_nodes=es01,es02
-  #     - cluster.name=docker-cluster
-  #     - bootstrap.memory_lock=true
-  #     - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-  #   ulimits:
-  #     memlock:
-  #       soft: -1
-  #       hard: -1
-  #   volumes:
-  #     - esdata02:/usr/share/elasticsearch/data
-  #   networks:
-  #     - esnet
-  
+  es01:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.4.1
+    container_name: es01
+    environment:
+      - node.name=es01
+      - discovery.seed_hosts=es02
+      - cluster.initial_master_nodes=es01,es02
+      - cluster.name=docker-cluster
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - esdata01:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+    networks:
+      - esnet
+  es02:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.4.1
+    container_name: es02
+    environment:
+      - node.name=es02
+      - discovery.seed_hosts=es01
+      - cluster.initial_master_nodes=es01,es02
+      - cluster.name=docker-cluster
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - esdata02:/usr/share/elasticsearch/data
+    networks:
+      - esnet
   api:
     build: 
       context: ./FloogleAPI/
       dockerfile: Dockerfile
+      args:
+        uid: 1000
     image: floogleapi:latest
+    environment:
+      - APACHE_RUN_USER=#1000
+      - APACHE_RUN_GROUP=#1000
     env_file: "./FloogleAPI/.env"
     ports: 
-      - "9999:80"
+      - "8000:80"
     volumes: 
-      - ./FloogleAPI:/var/www
+      - ./FloogleAPI:/var/www/html
+    networks:
+      - esnet
   
   web:
     build:
@@ -61,11 +67,11 @@ services:
     ports:
       - "4201:4200"
 
-# volumes:
-#   esdata01:
-#     driver: local
-#   esdata02:
-#     driver: local
+volumes:
+  esdata01:
+    driver: local
+  esdata02:
+    driver: local
 
-# networks:
-#   esnet:
+networks:
+  esnet:

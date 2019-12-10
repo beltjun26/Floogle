@@ -6,11 +6,11 @@ from scrapy.linkextractors import LinkExtractor
 from scrapy.loader import ItemLoader
 from scrapy.loader.processors import TakeFirst
 from scrapy.utils.response import open_in_browser
-from Floogle.items import PingboardItem
+from pingboard.items import PingboardItem
 
 
-class PingboardSpider(scrapy.Spider):
-    name = 'pingboard'
+class FlPingboardSpider(scrapy.Spider):
+    name = 'fl-pingboard'
     allowed_domains = ['freelancer.pingboard.com']
     
     start_urls = ['https://freelancer.pingboard.com/sign_in']

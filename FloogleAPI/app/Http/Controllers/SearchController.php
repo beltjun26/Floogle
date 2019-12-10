@@ -32,7 +32,12 @@ class SearchController extends Controller
 
 
     private function searchElasticsearch($keyword){
-        $client = ClientBuilder::create()->build();
+        $hosts =[
+            'http://es01:9200',
+        ];
+        $client = ClientBuilder::create()
+            ->setHosts($hosts)
+            ->build();
         $dashboardBoost = 1.0;
         if(strpos($keyword, 'dashboard') !== false){
             $dashboardBoost = 5.0;
@@ -40,8 +45,8 @@ class SearchController extends Controller
         $params = [
             'body' => [
                 'indices_boost' => [
-                    'fl-dashboard' => $dashboardBoost,
-                    'website' => 10,
+                    // 'fl-dashboard' => $dashboardBoost,
+                //     'website' => 10,
                 ],
                 'query' => [
                     'multi_match' => [
