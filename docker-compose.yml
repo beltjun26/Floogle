@@ -46,7 +46,7 @@ services:
     image: floogleapi:latest
     env_file: "./FloogleAPI/.env"
     ports: 
-      - "8888:80"
+      - "9999:80"
     volumes: 
       - ./FloogleAPI:/var/www
   
