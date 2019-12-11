@@ -1,0 +1,44 @@
+2019-12-10 21:12:12 [scrapy.utils.log] INFO: Scrapy 1.7.4 started (bot: dashboard)
+2019-12-10 21:12:12 [scrapy.utils.log] INFO: Scrapy 1.7.4 started (bot: dashboard)
+2019-12-10 21:12:12 [scrapy.utils.log] INFO: Versions: lxml 4.4.1.0, libxml2 2.9.9, cssselect 1.1.0, parsel 1.5.2, w3lib 1.21.0, Twisted 19.7.0, Python 2.7.15+ (default, Nov 27 2018, 23:36:35) - [GCC 7.3.0], pyOpenSSL 19.0.0 (OpenSSL 1.1.1c  28 May 2019), cryptography 2.7, Platform Linux-4.15.0-66-generic-x86_64-with-Ubuntu-18.04-bionic
+2019-12-10 21:12:12 [scrapy.utils.log] INFO: Versions: lxml 4.4.1.0, libxml2 2.9.9, cssselect 1.1.0, parsel 1.5.2, w3lib 1.21.0, Twisted 19.7.0, Python 2.7.15+ (default, Nov 27 2018, 23:36:35) - [GCC 7.3.0], pyOpenSSL 19.0.0 (OpenSSL 1.1.1c  28 May 2019), cryptography 2.7, Platform Linux-4.15.0-66-generic-x86_64-with-Ubuntu-18.04-bionic
+Traceback (most recent call last):
+Traceback (most recent call last):
+  File "/home/beltjun/fli/bin/scrapy", line 10, in <module>
+  File "/home/beltjun/fli/bin/scrapy", line 10, in <module>
+        sys.exit(execute())
+sys.exit(execute())
+  File "/home/beltjun/fli/local/lib/python2.7/site-packages/scrapy/cmdline.py", line 146, in execute
+  File "/home/beltjun/fli/local/lib/python2.7/site-packages/scrapy/cmdline.py", line 146, in execute
+    _run_print_help(parser, _run_command, cmd, args, opts)
+  File "/home/beltjun/fli/local/lib/python2.7/site-packages/scrapy/cmdline.py", line 100, in _run_print_help
+    func(*a, **kw)
+  File "/home/beltjun/fli/local/lib/python2.7/site-packages/scrapy/cmdline.py", line 154, in _run_command
+    _run_print_help(parser, _run_command, cmd, args, opts)
+  File "/home/beltjun/fli/local/lib/python2.7/site-packages/scrapy/cmdline.py", line 100, in _run_print_help
+    cmd.run(args, opts)
+  File "/home/beltjun/fli/local/lib/python2.7/site-packages/scrapy/commands/crawl.py", line 57, in run
+    func(*a, **kw)
+  File "/home/beltjun/fli/local/lib/python2.7/site-packages/scrapy/cmdline.py", line 154, in _run_command
+    cmd.run(args, opts)
+  File "/home/beltjun/fli/local/lib/python2.7/site-packages/scrapy/commands/crawl.py", line 57, in run
+        self.crawler_process.crawl(spname, **opts.spargs)
+self.crawler_process.crawl(spname, **opts.spargs)
+  File "/home/beltjun/fli/local/lib/python2.7/site-packages/scrapy/crawler.py", line 183, in crawl
+  File "/home/beltjun/fli/local/lib/python2.7/site-packages/scrapy/crawler.py", line 183, in crawl
+        crawler = self.create_crawler(crawler_or_spidercls)
+crawler = self.create_crawler(crawler_or_spidercls)
+  File "/home/beltjun/fli/local/lib/python2.7/site-packages/scrapy/crawler.py", line 216, in create_crawler
+  File "/home/beltjun/fli/local/lib/python2.7/site-packages/scrapy/crawler.py", line 216, in create_crawler
+    return self._create_crawler(crawler_or_spidercls)
+      File "/home/beltjun/fli/local/lib/python2.7/site-packages/scrapy/crawler.py", line 220, in _create_crawler
+return self._create_crawler(crawler_or_spidercls)
+  File "/home/beltjun/fli/local/lib/python2.7/site-packages/scrapy/crawler.py", line 220, in _create_crawler
+    spidercls = self.spider_loader.load(spidercls)
+    spidercls = self.spider_loader.load(spidercls)
+  File "/home/beltjun/fli/local/lib/python2.7/site-packages/scrapy/spiderloader.py", line 71, in load
+  File "/home/beltjun/fli/local/lib/python2.7/site-packages/scrapy/spiderloader.py", line 71, in load
+    raise KeyError("Spider not found: {}".format(spider_name))
+KeyError: 'Spider not found: phriction'
+    raise KeyError("Spider not found: {}".format(spider_name))
+KeyError: 'Spider not found: fl-pingboard'

@@ -1,17 +1,24 @@
-# As Scrapy runs on Python, I choose the official Python 3 Docker image.
-FROM python:3
- 
-# Set the working directory to /usr/src/app.
-WORKDIR /usr/src/app
- 
-# Copy the file from the local host to the filesystem of the container at the working directory.
-COPY requirements.txt ./
- 
-# Install Scrapy specified in requirements.txt.
-RUN pip3 install --no-cache-dir -r requirements.txt
- 
-# Copy the project source code from the local host to the filesystem of the container at the working directory.
-COPY . .
- 
-# Run the crawler when the container launches.
-CMD [ "python3", "./go-spider.py" ]
+FROM ubuntu:latest
+
+RUN apt-get update && apt-get -y install cron python3 python3-pip at
+RUN pip3 install scrapy
+RUN pip3 install ScrapyElasticSearch
+
+# Copy hello-cron file to the cron.d directory
+WORKDIR /root
+
+COPY crawler-cron /etc/cron.d/crawler-cron
+COPY . /root
+
+# Give execution rights on the cron job
+RUN chmod 0644 /etc/cron.d/crawler-cron
+
+# Apply cron job
+RUN crontab /etc/cron.d/crawler-cron
+
+# Create the log file to be able to run tail
+RUN touch /var/log/cron.log
+
+ENTRYPOINT "/root/crawl.sh"
+# Run the command on container startup
+# CMD cron && tail -f /var/log/cron.log
