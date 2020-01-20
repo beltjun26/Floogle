@@ -1,0 +1,49 @@
+version: '2.2'
+services:
+  api:
+    build: 
+      context: ./FloogleAPI/
+      dockerfile: Dockerfile
+      args:
+        uid: 1000
+    image: floogleapi:latest
+    environment:
+      - APACHE_RUN_USER=#1000
+      - APACHE_RUN_GROUP=#1000
+      - APP_ENV=local
+      - ES_HOST=floogle.elasticsearch.service.consul
+    env_file: "./FloogleAPI/.env"
+    ports: 
+      - "8000:80"
+    volumes: 
+      - ./FloogleAPI:/var/www/html
+    networks:
+      - esnet
+  web:
+    build:
+      context: ./FloogleWeb/
+      dockerfile: Dockerfile
+    image: floogleweb:latest
+    volumes:
+      - './FloogleWeb:/app'
+      - '/app/node_modules'
+    ports:
+      - "80:4200"
+    networks:
+      - esnet
+
+  crawler:
+    build:
+      context: ./WebCrawler/
+      dockerfile: Dockerfile
+    image: webcrawler:latest
+    environment:
+      - APP_ENV=staging
+      - ES_HOST=floogle.elasticsearch.service.consul
+    command:
+      - /root/crawl.sh
+    networks:
+      - esnet
+
+networks:
+  esnet:

@@ -1,5 +1,4 @@
 #!/bin/bash
-touch testFiles
 sleep 60
 cd /root/pingboard
 scrapy crawl fl-pingboard 

@@ -24,7 +24,7 @@ export class SearchService {
     let params = new HttpParams();
     params = params.append('search', $keyword);
 
-    return this.http.get('http://localhost:8000/api/search', { params }).pipe(
+    return this.http.get('http://api/api/search', { params }).pipe(
       map(data => {
         console.log(data);
         const result = data['result'];
