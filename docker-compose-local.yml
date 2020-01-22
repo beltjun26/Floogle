@@ -48,8 +48,6 @@ services:
     environment:
       - APACHE_RUN_USER=#1000
       - APACHE_RUN_GROUP=#1000
-      - APP_ENV=local
-      - ES_HOST=es01
     env_file: "./FloogleAPI/.env"
     ports: 
       - "8000:80"
