@@ -7,6 +7,7 @@ from scrapy.loader import ItemLoader
 from scrapy.loader.processors import TakeFirst
 from scrapy.utils.response import open_in_browser
 from pingboard.items import PingboardItem
+import os
 
 
 class FlPingboardSpider(scrapy.Spider):
@@ -23,12 +24,16 @@ class FlPingboardSpider(scrapy.Spider):
 
     def parse_login(self, response):
         token = response.xpath('//*[@name="authenticity_token"]/@value').extract_first()
+
+        username = (os.environ['PINGBOARD_USERNAME'])
+        password = (os.environ['PINGBOARD_PASSWORD'])
+
         return FormRequest.from_response(
             response,
             formdata={
                 'authenticity_token': token,
-                'user[email]': 'rabisado@freelancer.com',
-                'user[password]': 'ilovesports26',
+                'user[email]': username,
+                'user[password]': password,
             },
             callback=self.scrape_page,
             dont_filter=True,

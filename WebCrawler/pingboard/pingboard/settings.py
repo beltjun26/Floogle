@@ -90,12 +90,14 @@ ROBOTSTXT_OBEY = False
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 import os
 es_host = (os.environ['ES_HOST'])
+es_port = (os.environ['ES_PORT'])
+server = '{}:{}'.format(es_host, es_port)
 
 ITEM_PIPELINES = {
     'scrapyelasticsearch.scrapyelasticsearch.ElasticSearchPipeline': 500
 }
 
-ELASTICSEARCH_SERVERS = [es_host]
+ELASTICSEARCH_SERVERS = [server]
 ELASTICSEARCH_INDEX = 'pingboard'
 ELASTICSEARCH_INDEX_DATE_FORMAT = ''
 ELASTICSEARCH_TYPE = '_doc'

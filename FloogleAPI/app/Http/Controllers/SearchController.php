@@ -32,8 +32,11 @@ class SearchController extends Controller
 
 
     private function searchElasticsearch($keyword){
+        $host = config('elasticsearch.host');
+        $port = config('elasticsearch.port');
+
         $hosts =[
-            'http://es01:9200',
+            "{$host}:{$port}",
         ];
         $client = ClientBuilder::create()
             ->setHosts($hosts)

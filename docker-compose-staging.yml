@@ -10,9 +10,7 @@ services:
     environment:
       - APACHE_RUN_USER=#1000
       - APACHE_RUN_GROUP=#1000
-      - APP_ENV=local
-      - ES_HOST=floogle.elasticsearch.service.consul
-    env_file: "./FloogleAPI/.env"
+    env_file: "./FloogleAPI/.env.staging"
     ports: 
       - "8000:80"
     volumes: 
@@ -37,9 +35,8 @@ services:
       context: ./WebCrawler/
       dockerfile: Dockerfile
     image: webcrawler:latest
-    environment:
-      - APP_ENV=staging
-      - ES_HOST=floogle.elasticsearch.service.consul
+    env_file:
+      "./WebCrawler/.env.staging"
     command:
       - /root/crawl.sh
     networks:

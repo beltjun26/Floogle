@@ -5,6 +5,8 @@ from scrapy.linkextractors import LinkExtractor
 from scrapy.loader import ItemLoader
 from scrapy.loader.processors import TakeFirst
 from dashboard.items import DashboardItem
+import os
+
 
 class DashboardmainSpider(scrapy.Spider):
     name = 'dashboardMain'
@@ -13,9 +15,11 @@ class DashboardmainSpider(scrapy.Spider):
     download_delay = 1.0
 
     def start_requests(self):
+        oath2 = (os.environ['FL_DASHBOARD_OATH'])
+
         yield Request(
             url='https://dashboard.analytics.flnltd.com/',
-            cookies={'_oauth2_proxy': 'cmFiaXNhZG9AZnJlZWxhbmNlci5jb20=|1572524632|stwKQo6RA0inkYz_CbV1WjKkRuc='},
+            cookies={'_oauth2_proxy': oath2},
             cb_kwargs={'title': 'Dashboard Home', 'initial_title': 'Home'}
         )
 

@@ -5,6 +5,7 @@ from scrapy.linkextractors import LinkExtractor
 from scrapy.loader import ItemLoader
 from phab.items import PhabItem
 from scrapy.loader.processors import TakeFirst
+import os
 
 
 class PhrictionSpider(scrapy.Spider):
@@ -22,12 +23,15 @@ class PhrictionSpider(scrapy.Spider):
 
     def parse_login(self, response):
         token = response.xpath('//*[@name="__csrf__"]/@value').extract_first()
+        username = (os.environ['PHRICTION_USERNAME'])
+        password = (os.environ['PHRICTION_PASSWORD'])
+
         return FormRequest.from_response(
             response,
             formdata={
                 '__csrf__': token,
-                'username': 'rabisado',
-                'password': 'ilovesports26',
+                'username': username,
+                'password': password,
             },
             callback=self.scrape_page,
             dont_filter=True,
