@@ -12,23 +12,23 @@ services:
       - APACHE_RUN_GROUP=#1000
     env_file: "./FloogleAPI/.env.staging"
     ports: 
-      - "8000:80"
+      - "8081:80"
     volumes: 
       - ./FloogleAPI:/var/www/html
     networks:
-      - esnet
+      - flooglenet
   web:
     build:
       context: ./FloogleWeb/
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile-prod
     image: floogleweb:latest
     volumes:
       - './FloogleWeb:/app'
       - '/app/node_modules'
     ports:
-      - "80:4200"
+      - "8080:80"
     networks:
-      - esnet
+      - flooglenet
 
   crawler:
     build:
@@ -40,7 +40,19 @@ services:
     command:
       - /root/crawl.sh
     networks:
-      - esnet
+      - flooglenet
+  
+  reverseproxy:
+    build:
+      context: ./Nginx/
+      dockerfile: Dockerfile
+    image: reverseproxy:latest
+    networks:
+      - flooglenet
+    ports:
+      - 80:80
+      - 433:433
+
 
 networks:
-  esnet:
+  flooglenet:

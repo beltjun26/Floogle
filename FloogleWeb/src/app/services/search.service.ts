@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 import { SearchResult } from '../search/search.model';
 import { $ } from 'protractor';
 
@@ -21,10 +22,12 @@ export class SearchService {
     //   })
     // };
 
+    const api = environment.api;
+
     let params = new HttpParams();
     params = params.append('search', $keyword);
 
-    return this.http.get('http://api/api/search', { params }).pipe(
+    return this.http.get(api.concat('search'), { params }).pipe(
       map(data => {
         console.log(data);
         const result = data['result'];

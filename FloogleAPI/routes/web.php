@@ -18,3 +18,6 @@ Route::get('/', function () {
 Route::get('/test', function() {
     return "asdfasdfasdf";
 });
+
+Route::get('/search', 'SearchController@search')->middleware(['cors']);
+Route::get('/rawSearch', 'SearchController@rawSearch')->middleware(['cors']);

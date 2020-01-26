@@ -11,7 +11,7 @@ import { Component, OnInit, Input } from '@angular/core';
         mat-card-avatar src="assets/images/pingboard.png"
       >
       <img
-        *ngIf="searchResult.type === 'phabricator-2019-10'"
+        *ngIf="searchResult.type === 'phabricator'"
         class="example-header-image"
         mat-card-avatar src="assets/images/phabricator.png"
       >
