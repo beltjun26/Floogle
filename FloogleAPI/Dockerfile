@@ -48,5 +48,6 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # otherwise command from inside container will create root-owned files and directories
 ARG uid
 RUN useradd -G www-data,root -u $uid -d /home/devuser devuser
+# RUN chown -R www-data:www-data /var/www/html/storage
 RUN mkdir -p /home/devuser/.composer && \
     chown -R devuser:devuser /home/devuser

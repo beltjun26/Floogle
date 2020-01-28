@@ -20,3 +20,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('/search', 'SearchController@search')->middleware(['cors']);
 Route::get('/rawSearch', 'SearchController@rawSearch')->middleware(['cors']);
 Route::options('{any}')->middleware(['cors']);
+Route::get('/test', function() {
+    return "asdfasdfasdf";
+});

@@ -48,7 +48,7 @@ class SearchController extends Controller
         $params = [
             'body' => [
                 'indices_boost' => [
-                    // 'fl-dashboard' => $dashboardBoost,
+                    'fl-dashboard' => $dashboardBoost,
                 //     'website' => 10,
                 ],
                 'query' => [
